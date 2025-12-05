@@ -37,14 +37,17 @@ for(celltype in c('Astros','Excitatory_Neurons_L4')){
   } else{
     filename <- celltype
   }
+
   #Extract cells from one celltype
   ctcell <- subset(NewType,NewType==celltype & Type==SamType)[,'cell']
+
   #Network Construction
   ctnets <- ConstructCTnet(species='human',myexp=myexp,ctcell=ctcell,log2fc=log2fc,celltype=celltype,imput=TRUE,mysigDEG=mysigDEG)
-  
   save(ctnets,file=paste0(filename,'nets.rda'))
+
   #Network visulization
   netVisual(ctnet=ctnets,filename=filename)
+
   #Drug Repurposing Score computation
   #cutoff=1.5
   drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1.5,prox=FALSE,myprox=paste0(filename,'.proximity_raw.rda'))
