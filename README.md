@@ -1,4 +1,4 @@
-# scPsyDrug   
+# scPsyDrug
 For optimal performance, run this software on a high-memory server.
 
 Installation
