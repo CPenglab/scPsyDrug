@@ -23,6 +23,7 @@ install.packages("scPsyDrug_0.0.1.tar.gz", repos = NULL, type = "source")
 **2. Quick Start**
 
 scPsyDrug performs drug repurposing based on single-cell transcriptomics. The required input data are as follows:
+
 (1) A list of differentially expressed genes (DEGs) between the disease (abnormal) condition and the normal control. It is recommended to name the columns using the following rules:
 NewType: cell type
 avg_log2FC: log2 fold change (log2FC)
