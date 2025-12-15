@@ -75,7 +75,7 @@ for(celltype in c('Astros','Excitatory_Neurons_L4')){
 When the parameter imput = TRUE, the ConstructCTnet function may take a long time to run and will generate a graphdata.rda file. Therefore, if you have already run ConstructCTnet once and obtained graphdata.rda, but want to modify other parameters (e.g., log2fc) and run ConstructCTnet again, you can provide the absolute path to your existing graphdata.rda file and set imput = FALSE. This can significantly reduce the computation time.
 ```
 graphdata=paste0(filename,'.graphdata.rda')
-ctnets <- ConstructCTnet(species='human',myexp=myexp,ctcell=ctcell,log2fc=log2fc,celltype=celltype,imput=FALSE, graphdata=graphdata,intersect=0.01,mysigDEG=mysigDEG)
+ctnets <- ConstructCTnet(species='human',myexp=myexp,ctcell=ctcell,log2fc=log2fc,celltype=celltype,imput=FALSE, graphdata=graphdata,mysigDEG=mysigDEG)
 ```
 
 For the DrugEft function, the default setting is prox = TRUE, which generates a proximity_raw.rda file. This means that if you want to rerun DrugEft using a different cutoff value, you can set prox = FALSE and provide the absolute path to your proximity_raw.rda file via myprox. For example, myprox = "Astros.proximity_raw.rda". This can speed up the execution of DrugEft.
