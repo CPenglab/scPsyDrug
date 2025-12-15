@@ -26,7 +26,9 @@ scPsyDrug performs drug repurposing based on single-cell transcriptomics. The re
 
 (1) A list of differentially expressed genes (DEGs) between the disease (abnormal) condition and the normal control. It is recommended to name the columns using the following rules:
 NewType: cell type
+
 avg_log2FC: log2 fold change (log2FC)
+
 gene: gene symbol
 
 (2) A gene expression matrix for the disease (abnormal) condition, formatted as gene × cell.
