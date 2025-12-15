@@ -20,7 +20,7 @@ devtools::install_github("shmohammadi86/SCINET") # More details see https://gith
 install.packages("scPsyDrug_0.0.1.tar.gz", repos = NULL, type = "source") 
 ```
 
-**2. Quick Start**
+**Quick Start**
 
 scPsyDrug performs drug repurposing based on single-cell transcriptomics. The required input data are as follows:
 
