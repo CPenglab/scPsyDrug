@@ -1,25 +1,40 @@
 # scPsyDrug
-For optimal performance, run this software on a high-memory server.
+we developed a cell-type specific network based computational pipeline scPsyDrug to prioritize the drugs for psychiatric diseases by integrating the single-cell transcriptomics, protein-protein interactions, drug-target interactions and psychiatric risk genes. Single cell transcriptomics were integrated with reference protein-protein interactions to construct cell-type specific networks. The cell-type specific differentially expressed genes (DEGs) and psychiatric disease risk (PSD) genes were used to define seed genes in cell-type specific network. Network proximity between drug targets and the seed genes were calculated in each cell-type specific module, which was used to rank the drugs.
 
-Installation
+**Installation**
 1.	Install dependencies (In Terminal):
 ```
 conda install -c conda-forge r-tidyr r-stringr r-ggplot2 r-pbapply r-igraph r-tidygraph r-ggraph r-ggrastr r-ggalluvial r-ggrepel r-magrittr r-matrix
 conda install -c conda-forge hdf5 suitesparse openssl libcurl libxml2
 ```
 
-3.	Install ACTIONet & SCINET (in R)
+2.	Install ACTIONet & SCINET (in R)
 ```
 install.packages("devtools")
 devtools::install_github("shmohammadi86/ACTIONet", ref = "R-release")
-devtools::install_github("shmohammadi86/SCINET")
+devtools::install_github("shmohammadi86/SCINET") # More details see https://github.com/cure-lab/SCINet
+```
 
-4. Install scPsyDrug
+3. Install scPsyDrug
+```
 install.packages("scPsyDrug_0.0.1.tar.gz", repos = NULL, type = "source") 
 ```
-More details see https://github.com/cure-lab/SCINet
 
-Using the MDD dataset as an example
+**2. Quick Start**
+
+scPsyDrug performs drug repurposing based on single-cell transcriptomics. The required input data are as follows:
+1) A list of differentially expressed genes (DEGs) between the disease (abnormal) condition and the normal control. It is recommended to name the columns using the following rules:
+NewType: cell type
+avg_log2FC: log2 fold change (log2FC)
+gene: gene symbol
+
+2) A gene expression matrix for the disease (abnormal) condition, formatted as gene × cell.
+
+3) Metadata for the single-cell dataset, including cell names and cell types.
+
+For optimal performance, run this software on a high-memory server.
+
+Using the demo as an example.
 ```
 #load data
 load('demo.rda')
@@ -29,7 +44,6 @@ mysigDEG <- DEGfilt
 log2fc <- 0.1
 SamType= 'Suicide'
 myexp <- demo@assays$RNA$data
-celltypes <- unique(NewType$NewType)
 for(celltype in c('Astros','Excitatory_Neurons_L4')){
   print(celltype)
   if(grepl('\\/',celltype)){
@@ -50,7 +64,7 @@ for(celltype in c('Astros','Excitatory_Neurons_L4')){
 
   #Drug Repurposing Score computation
   #cutoff=1.5
-  drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1.5,prox=FALSE,myprox=paste0(filename,'.proximity_raw.rda'))
+  drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1.5)
   write.table(drugEffect,file=paste0(filename,'.drug_rank_1.5.txt'),sep='\t',quote=F,row.names=F)
 }
 ```
@@ -58,4 +72,21 @@ When the parameter imput = TRUE, the ConstructCTnet function may take a long tim
 ```
 graphdata=paste0(filename,'.graphdata.rda')
 ctnets <- ConstructCTnet(species='human',myexp=myexp,ctcell=ctcell,log2fc=log2fc,celltype=celltype,imput=FALSE, graphdata=graphdata,intersect=0.01,mysigDEG=mysigDEG)
+```
+
+For the DrugEft function, the default setting is prox = TRUE, which generates a proximity_raw.rda file. This means that if you want to rerun DrugEft using a different cutoff value, you can set prox = FALSE and provide the absolute path to your proximity_raw.rda file via myprox. For example, myprox = "Astros.proximity_raw.rda". This can speed up the execution of DrugEft.
+```
+for(celltype in c('Astros','Excitatory_Neurons_L4'){
+  print(celltype)
+  if(grepl('\\/',celltype)){
+    filename <- gsub('\\/','',celltype)
+  } else{
+    filename <- celltype
+  }
+  tryCatch({
+    load(paste0(filename,'nets.rda'))
+    drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1,prox=FALSE,myprox=paste0(filename,'.proximity_raw.rda'))
+    write.table(drugEffect,file=paste0(filename,'.drug_rank_1.5.txt'),sep='\t',quote=F,row.names=F)
+  },error=function(e){})
+}
 ```
