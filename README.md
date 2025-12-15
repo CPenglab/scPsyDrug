@@ -87,10 +87,10 @@ for(celltype in c('Astros','Excitatory_Neurons_L4'){
   } else{
     filename <- celltype
   }
-  tryCatch({
-    load(paste0(filename,'nets.rda'))
-    drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1,prox=FALSE,myprox=paste0(filename,'.proximity_raw.rda'))
-    write.table(drugEffect,file=paste0(filename,'.drug_rank_1.5.txt'),sep='\t',quote=F,row.names=F)
-  },error=function(e){})
+
+load(paste0(filename,'nets.rda'))
+drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1,prox=FALSE,myprox=paste0(filename,'.proximity_raw.rda'))
+write.table(drugEffect,file=paste0(filename,'.drug_rank_1.txt'),sep='\t',quote=F,row.names=F)
+
 }
 ```
