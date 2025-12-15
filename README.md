@@ -47,7 +47,7 @@ load('demo.rda')
 mysigDEG <- DEGfilt
 log2fc <- 0.1
 SamType= 'Suicide'
-myexp <- demo@assays$RNA$data
+myexp <- myexp[,subset(NewType,Type== SamType)[,'Cell']]
 for(celltype in c('Astros','Excitatory_Neurons_L4')){
   print(celltype)
   if(grepl('\\/',celltype)){
