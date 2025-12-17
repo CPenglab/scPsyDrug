@@ -11,7 +11,6 @@ conda install r::r-devtools
 
 2.	Install ACTIONet & SCINET (in R)
 ```
-install.packages("devtools")
 devtools::install_github("shmohammadi86/ACTIONet", ref = "R-release")
 devtools::install_github("shmohammadi86/SCINET") # More details see https://github.com/shmohammadi86/SCINET
 ```
