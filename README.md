@@ -16,6 +16,7 @@ devtools::install_github("shmohammadi86/SCINET") # More details see https://gith
 ```
 
 3. Install scPsyDrug
+R Version >=4.3.2
 ```
 install.packages("scPsyDrug_0.0.0.9000.tar.gz", repos = NULL, type = "source") 
 ```
