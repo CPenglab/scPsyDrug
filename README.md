@@ -6,7 +6,7 @@ we developed a cell-type specific network based computational pipeline scPsyDrug
 ```
 conda install -c conda-forge r-tidyr r-stringr r-ggplot2 r-pbapply r-igraph r-tidygraph r-ggraph r-ggrastr r-ggalluvial r-ggrepel r-magrittr r-matrix
 conda install -c conda-forge hdf5 suitesparse openssl libcurl libxml2 r-rcpp r-rcpparmadillo r-matrix r-seriation r-devtools r-ggplot2 r-ggpubr r-ggrepel r-gplots r-hdf5r r-pals r-plotly r-rcolorbrewer
-conda install -c bioconda bioconductor-biocparallel bioconductor-batchelor bioconductor-complexheatmap bioconda::grid r-matrixstats bioconductor-singlecellexperiment
+conda install -c bioconda bioconductor-biocparallel bioconductor-batchelor bioconductor-complexheatmap grid r-matrixstats bioconductor-singlecellexperiment
 ```
 
 2.	Install ACTIONet & SCINET (in R)
