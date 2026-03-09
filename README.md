@@ -76,7 +76,7 @@ for(celltype in c('Astros','Excitatory_Neurons_L4')){
   write.table(drugEffect,file=paste0(filename,'.drug_rank_1.5.txt'),sep='\t',quote=F,row.names=F)
 }
 ```
-When you finished, you will get these output files. _celltype.graphdata.rda_ stores the imputation data; _celltype.Modulex.Hyp_ and _celltype.sigModule.pdf_ shown pvalue of hypergeometric test in modules; _celltypenets.rda_ is a class that storing the igraph network and seed genes; _celltype..Modulex.PPI.pdf_ is PPI network of different modules; _celltype..PPI.ModuleNodes.pdf_ is the number of nodes between different modules; _celltype.proximity_1.5.rda_ and _celltype.proximity_1.5.txt_ stored the raw proximity value of targets; _celltype.drug_rank_1.5.txt_ and _celltype.drug_rank_1.5.pdf_ were final results showing the drug ranking.
+When you finished, you will get these output files. _**celltype.graphdata.rda**_ stores the imputation data; _**celltype.Modulex.Hyp**_ and _**celltype.sigModule.pdf**_ shown pvalue of hypergeometric test in modules; _**celltypenets.rda**_ is a class that storing the igraph network and seed genes; _**celltype..Modulex.PPI.pdf**_ is PPI network of different modules; _**celltype..PPI.ModuleNodes.pdf**_ is the number of nodes between different modules; _**celltype.proximity_1.5.rda**_ and _**celltype.proximity_1.5.txt**_ stored the raw proximity value of targets; _**celltype.drug_rank_1.5.txt**_ and _**celltype.drug_rank_1.5.pdf**_ were final results showing the drug ranking.
 
 ![output structure](images/output%20structure.png)
 
