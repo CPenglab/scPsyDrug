@@ -40,7 +40,7 @@ gene: gene symbol
 
 For optimal performance, run this software on a high-memory server.
 
-Using the demo as an example.
+Using the demo as an example. You can run the pipeline using your own sc/snRNA-seq data, provided it follows the same format as in demo.rda.
 1. Prepare Input data
 ```
 #load data
