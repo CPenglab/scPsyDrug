@@ -1,0 +1,3 @@
+utils::globalVariables(c(".","aes","aggregate","anno","as","avg_log2FC", "Cohort","colorRampPalette","ctnets","dis",
+"element_blank","element_rect","element_text","filename","gene","gene1","gene2","geneA","geneB","label","module","Module","Molecular","na.omit","new",
+"NewType","node","nodes","Nodes","phyper","position_dodge","pvalue","Right_Tail","sd","seed_genes","size","stratum","weight","write.table","x","y","Zproximity","object"))
