@@ -1,6 +1,6 @@
 # scPsyDrug
 we developed a cell-type specific network based computational pipeline scPsyDrug to prioritize the drugs for psychiatric diseases by integrating the single-cell transcriptomics, protein-protein interactions, drug-target interactions and psychiatric risk genes. Single cell transcriptomics were integrated with reference protein-protein interactions to construct cell-type specific networks. The cell-type specific differentially expressed genes (DEGs) and psychiatric disease risk (PSD) genes were used to define seed genes in cell-type specific network. Network proximity between drug targets and the seed genes were calculated in each cell-type specific module, which was used to rank the drugs.
-![Work flow of scPsyDrug](images/workflow.jpg)
+![Work flow of scPsyDrug](images/workflow.png)
 
 **Installation**
 1.	Install dependencies (In Terminal):
