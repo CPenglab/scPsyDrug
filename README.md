@@ -81,7 +81,7 @@ When you finished, you will get these output files. _**celltype.graphdata.rda**_
 ![output structure](images/output%20structure.png)
 
 
-3. Others Details.
+**Others Details**
 
 When the parameter imput = TRUE, the ConstructCTnet function may take a long time to run and will generate a graphdata.rda file. Therefore, if you have already run ConstructCTnet once and obtained graphdata.rda, but want to modify other parameters (e.g., log2fc) and run ConstructCTnet again, you can provide the absolute path to your existing graphdata.rda file and set imput = FALSE. This can significantly reduce the computation time.
 ```
