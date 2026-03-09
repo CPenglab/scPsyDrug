@@ -9,7 +9,7 @@ conda install -c conda-forge r-tidyr r-stringr r-pbapply r-igraph r-tidygraph r-
 conda install -c bioconda bioconductor-biocparallel bioconductor-batchelor bioconductor-complexheatmap grid  bioconductor-singlecellexperiment
 ```
 
-2.	Install ACTIONet & SCINET (in R)
+2.	Install depenency: ACTIONet & SCINET (in R)
 ```
 devtools::install_github("shmohammadi86/ACTIONet", ref = "R-release")
 devtools::install_github("shmohammadi86/SCINET") # More details see https://github.com/shmohammadi86/SCINET
@@ -17,7 +17,7 @@ devtools::install_github("shmohammadi86/SCINET") # More details see https://gith
 
 3. Install scPsyDrug
 
-R Version >=4.3.3
+R Version >=4.3.2
 ```
 install.packages("scPsyDrug_0.0.0.9000.tar.gz", repos = NULL, type = "source") 
 ```
@@ -41,15 +41,17 @@ gene: gene symbol
 For optimal performance, run this software on a high-memory server.
 
 Using the demo as an example.
+1. Prepare Input data
 ```
 #load data
 load('demo.rda')
-
-#run pepline for every celltype
 mysigDEG <- DEGfilt
 log2fc <- 0.1
 SamType= 'Suicide'
 myexp <- myexp[,subset(NewType,Type== SamType)[,'Cell']]
+```
+2. Run cell-type specific pepline.
+```
 for(celltype in c('Astros','Excitatory_Neurons_L4')){
   print(celltype)
   if(grepl('\\/',celltype)){
@@ -59,21 +61,22 @@ for(celltype in c('Astros','Excitatory_Neurons_L4')){
   }
 
   #Extract cells from one celltype
-  ctcell <- subset(NewType,NewType==celltype & Type==SamType)[,'cell']
+  ctcell <- subset(NewType,NewType==celltype & Type==SamType)[,'Cell']
 
-  #Network Construction
+  #2.1 Construction of celll-type specific PPI network.
   ctnets <- ConstructCTnet(species='human',myexp=myexp,ctcell=ctcell,log2fc=log2fc,celltype=celltype,imput=TRUE,mysigDEG=mysigDEG)
   save(ctnets,file=paste0(filename,'nets.rda'))
 
-  #Network visulization
+  #2.2 Network visulization
   netVisual(ctnet=ctnets,filename=filename)
 
-  #Drug Repurposing Score computation
+  #2.3 Drug Repurposing Score computation
   #cutoff=1.5
   drugEffect <- DrugEft(species='human',ctnet=ctnets,mysigDEG=mysigDEG,celltype=celltype,zcutoff=-1.5)
   write.table(drugEffect,file=paste0(filename,'.drug_rank_1.5.txt'),sep='\t',quote=F,row.names=F)
 }
 ```
+3. Others Details.
 When the parameter imput = TRUE, the ConstructCTnet function may take a long time to run and will generate a graphdata.rda file. Therefore, if you have already run ConstructCTnet once and obtained graphdata.rda, but want to modify other parameters (e.g., log2fc) and run ConstructCTnet again, you can provide the absolute path to your existing graphdata.rda file and set imput = FALSE. This can significantly reduce the computation time.
 ```
 graphdata=paste0(filename,'.graphdata.rda')
