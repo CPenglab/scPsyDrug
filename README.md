@@ -78,7 +78,7 @@ for(celltype in c('Astros','Excitatory_Neurons_L4')){
 ```
 When you finished, you will get these output files.
 
-![output structure](images/output sturcture.png)
+![output structure](images/output%20structure.png)
 
 3. Others Details.
 
